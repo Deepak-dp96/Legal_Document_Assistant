@@ -1,0 +1,130 @@
+services:
+  backend-gateway:
+    build: ./backend-gateway
+    container_name: backend-gateway
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/legal_db
+      - CLAUSE_AGENT_URL=http://clause-agent:8001
+      - RISK_AGENT_URL=http://risk-detection-agent:8002
+      - DRAFT_AGENT_URL=http://draft-agent:8003
+      - SUMMARY_AGENT_URL=http://summary-agent:8004
+      - SECRET_KEY=${SECRET_KEY:-supersecretkey}
+      - ALGORITHM=HS256
+      - ACCESS_TOKEN_EXPIRE_MINUTES=30
+    volumes:
+      - ./backend-gateway:/app
+      - shared_data:/app/shared_data
+      - ./shared_data/uploads:/app/shared_data/uploads
+      - ./shared_data/reports:/app/shared_data/reports
+      - ./backend-gateway/logs:/app/logs
+    depends_on:
+      - db
+      - clause-agent
+      - risk-detection-agent
+      - draft-agent
+      - summary-agent
+    entrypoint: [ "/app/entrypoint.sh" ]
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+  clause-agent:
+    build: ./clause-agent
+    container_name: clause-agent
+    expose:
+      - "8001"
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - AI_PROVIDER=${AI_PROVIDER:-gemini}
+      - GEMINI_MODEL=${GEMINI_MODEL:-gemini-1.5-pro}
+      - GEMINI_TEMPERATURE=${GEMINI_TEMPERATURE:-0.2}
+      - GEMINI_MAX_TOKENS=${GEMINI_MAX_TOKENS:-8000}
+      - GEMINI_TOP_P=${GEMINI_TOP_P:-0.9}
+      - PORT=8001
+    volumes:
+      - ./clause-agent:/app
+      - ./clause-agent/logs:/app/logs
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8001 --reload
+
+  risk-detection-agent:
+    build: ./risk-detection-agent
+    container_name: risk-detection-agent
+    expose:
+      - "8002"
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - AI_PROVIDER=${AI_PROVIDER:-gemini}
+      - GEMINI_MODEL=${GEMINI_MODEL:-gemini-1.5-pro}
+      - GEMINI_TEMPERATURE=${GEMINI_TEMPERATURE:-0.2}
+      - GEMINI_MAX_TOKENS=${GEMINI_MAX_TOKENS:-8000}
+      - GEMINI_TOP_P=${GEMINI_TOP_P:-0.9}
+      - PORT=8002
+    volumes:
+      - ./risk-detection-agent:/app
+      - ./risk-detection-agent/logs:/app/logs
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8002 --reload
+
+  draft-agent:
+    build: ./draft-agent
+    container_name: draft-agent
+    expose:
+      - "8003"
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - AI_PROVIDER=${AI_PROVIDER:-gemini}
+      - GEMINI_MODEL=${GEMINI_MODEL:-gemini-1.5-pro}
+      - GEMINI_TEMPERATURE=${GEMINI_TEMPERATURE:-0.2}
+      - GEMINI_MAX_TOKENS=${GEMINI_MAX_TOKENS:-8000}
+      - GEMINI_TOP_P=${GEMINI_TOP_P:-0.9}
+      - GEMINI_TIMEOUT=${GEMINI_TIMEOUT:-30}
+      - PORT=8003
+    volumes:
+      - ./draft-agent:/app
+      - ./draft-agent/logs:/app/logs
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8003 --reload
+
+  summary-agent:
+    build: ./summary-agent
+    container_name: summary-agent
+    expose:
+      - "8004"
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - AI_PROVIDER=${AI_PROVIDER:-gemini}
+      - GEMINI_MODEL=${GEMINI_MODEL:-gemini-1.5-pro}
+      - GEMINI_TEMPERATURE=${GEMINI_TEMPERATURE:-0.2}
+      - GEMINI_MAX_TOKENS=${GEMINI_MAX_TOKENS:-8000}
+      - GEMINI_TOP_P=${GEMINI_TOP_P:-0.9}
+      - PORT=8004
+    volumes:
+      - ./summary-agent:/app
+      - ./summary-agent/logs:/app/logs
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8004 --reload
+
+  db:
+    image: postgres:15
+    container_name: legal_db
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=legal_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
+  shared_data:

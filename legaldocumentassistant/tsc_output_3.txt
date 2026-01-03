@@ -1,0 +1,46 @@
+src/App.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/AppRouter.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/SimpleApp.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/ErrorBoundary.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/TestPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/auth/RegisterForm.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/common/AIChatWidget.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/common/EnhancedRiskChatbot.tsx(155,60): error TS6133: 'index' is declared but its value is never read.
+src/components/common/HelpBotWidget_Enhanced.tsx(3,46): error TS6133: 'ChevronUp' is declared but its value is never read.
+src/components/common/HelpBotWidget_Simple.tsx(110,47): error TS6133: 'index' is declared but its value is never read.
+src/components/common/MessagesDropdown.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/common/NotificationsDropdown.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/common/ProfileDropdown.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/common/UserProfile.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/dashboard/AgentCard.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/dashboard/AgentCard.tsx(19,3): error TS6133: 'completionTime' is declared but its value is never read.
+src/components/layout/TopBar.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/risk/RiskWordHighlighter.tsx(28,10): error TS6133: 'hoveredWord' is declared but its value is never read.
+src/components/risk/RiskWordHighlighter.tsx(28,23): error TS6133: 'setHoveredWord' is declared but its value is never read.
+src/index.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/pages/AgentSelectionPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/pages/HelpPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/pages/LoginPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/pages/MyDocumentsPage.tsx(222,9): error TS6133: 'getRiskBadgeColor' is declared but its value is never read.
+src/pages/NotificationsPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/pages/RecentDocumentsPage.tsx(43,56): error TS2339: Property 'documents' does not exist on type 'ApiResponse'.
+src/pages/RecentDocumentsPage.tsx(44,34): error TS2339: Property 'documents' does not exist on type 'ApiResponse'.
+src/pages/RegisterPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/pages/agents/ClauseExtractionPage.tsx(4,81): error TS6133: 'ClockIcon' is declared but its value is never read.
+src/pages/agents/ClauseExtractionPage.tsx(19,10): error TS6133: 'jobStatus' is declared but its value is never read.
+src/pages/agents/ClauseExtractionPage.tsx(22,9): error TS6133: 'jobIdRef' is declared but its value is never read.
+src/pages/agents/DraftingAgentPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/pages/agents/DraftingAgentPage.tsx(4,91): error TS6133: 'LightbulbIcon' is declared but its value is never read.
+src/pages/agents/DraftingAgentPage.tsx(20,10): error TS6133: 'error' is declared but its value is never read.
+src/pages/agents/SummaryAgentPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/pages/agents/SummaryAgentPage.tsx(4,120): error TS6133: 'AlertTriangleIcon' is declared but its value is never read.
+src/pages/agents/SummaryAgentPage.tsx(4,160): error TS6133: 'ShieldAlertIcon' is declared but its value is never read.
+src/pages/agents/SummaryAgentPage.tsx(6,1): error TS6133: 'SummaryAnalysisResult' is declared but its value is never read.
+src/services/clauseService.ts(2,10): error TS6133: 'DocumentProcessingResult' is declared but its value is never read.
+src/services/clauseService.ts(52,26): error TS6133: 'jobId' is declared but its value is never read.
+src/services/draftService.ts(79,29): error TS6133: 'filename' is declared but its value is never read.
+src/services/draftService.ts(79,47): error TS6133: 'analysisResults' is declared but its value is never read.
+src/services/helpBotService.ts(124,46): error TS6133: 'text' is declared but its value is never read.
+src/services/summaryService.ts(18,34): error TS2339: Property 'results' does not exist on type 'ApiResponse<DocumentProcessingResult>'.
+src/services/summaryService.ts(18,54): error TS2339: Property 'results' does not exist on type 'ApiResponse<DocumentProcessingResult>'.
+src/services/summaryService.ts(19,29): error TS2339: Property 'results' does not exist on type 'ApiResponse<DocumentProcessingResult>'.
